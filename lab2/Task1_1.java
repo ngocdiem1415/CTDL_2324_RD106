@@ -22,9 +22,11 @@ public class Task1_1 {
 
     //n>0
     public static int getSn3(int n) {
+        int result =0;
         if (n == 1) return 1;
-        return 0;
+        return n * n + getSn3(n-1);
     }
+
 
     //n>=0 f(3) = 2.4.6
     public static int findTheDenominator(int n) {
@@ -43,9 +45,10 @@ public class Task1_1 {
     }
 
     public static void main(String[] args) {
-        System.out.println(getSn1(4));
-        System.out.println(getSn2(4));
-        System.out.println(findTheDenominator(3));
-        System.out.println(getSn4(10));
+//        System.out.println(getSn1(4));
+//        System.out.println(getSn2(4));
+//        System.out.println(findTheDenominator(3));
+        System.out.println(getSn3(2));
+//        System.out.println(getSn4(10));
     }
 }

@@ -2,7 +2,6 @@ package lab1;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 public class MyArray {
     private int[] array;
@@ -102,53 +101,50 @@ public class MyArray {
         for ( int i=0; i < array.length ; i++){
             if (array[i] == -1){
                 listIndex[cursor ++] = i;// luu vi tri
-
-                //ngoai le
-                if( i < k || array.length -k <= 1){
-
-
-                }else{
                     //cho k = 3
                     int sum =0;
 
                     // j =1
-                    for ( int j =1 ; i < k/2 +1 ; j++){
+                    for ( int j =1 ; j < k/2 +1 ; j++){
                         sum += array[i-j];
                         sum += array[i +j];
                     }
                     if ( k % 2 ==1){
-                        if ( array[i -k/2 -1] > array[i + k/2 +1]
-                        && array[i + k /2 +1] != -1){
+                        if ( array[i -k/2 -1] < array[i + k/2 +1] && array[i + k /2 +1] != -1){
                             sum += array[i +k/2 +1];
-                        }else if ( indexOf(listIndex, i -k/2 -1 ) != -1
-                                && i -k/2 -1 != 0);
+
+                        }else if ( indexOf(listIndex, i -k/2 -1 ) != -1 && i -k/2 -1 != 0){
                             sum += array[ i + k/2 +1];
+
                         }else {
-                        sum += array[i  -k/2 -1];
+                        sum += array[i - k / 2 - 1];
                     }
-                    sum /=k;
-                    array[i] = sum;
                 }
+                sum /=k;
+                array[i] = sum;
             }
         }
         return array;
     }
 
     public int indexOf(int[] lastIndex , int a){
-        for (int i=0 ; i < lastIndex.length; i ++) {
-
+        for( int i =0; i < lastIndex.length ; i++){
+            if ( a == lastIndex[i]){
+                return i;
+            }
         }
-        return 0;
+        return -1;
     }
 
     public static void main(String[] args) {
         int[] arr = {1, 3, 5, 7, 9, 3, 7, 8, 9, 10};
-        int[] array = {10, 10, 11, 12, 13, 14, 16, 17, 20};
+        int[] array = {10,11, 12, -1, 14,10,17,19, 20};
         MyArray test = new MyArray(array);
 //        System.out.println(Arrays.toString(test.mirror()));
 //        System.out.print(remove2(arr));
 //        System.out.print(Arrays.toString(test.removeDuplicates()));
-        System.out.print(test.getMissingValues().toString());
-        System.out.print(Arrays.toString(test.getMissingValues1()));
+//        System.out.print(test.getMissingValues().toString());
+//        System.out.print(Arrays.toString(test.getMissingValues1()));
+        System.out.println(Arrays.toString(test.fillMissingValue(4)));
     }
 }

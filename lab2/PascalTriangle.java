@@ -5,13 +5,13 @@ import java.util.Arrays;
 public class PascalTriangle {
 
     public static void print(int row) {
-        for (int i = 1; i < row; i++) {
+        for (int i = 1; i <= row; i++) {
             printPascalTriangle(getPascalTriangle(i));
             System.out.println();
         }
     }
     public  static void printPascalTriangle(int[] row){
-        for (int i = 1; i < row.length; i++) {
+        for (int i = 0; i < row.length; i++) {
             System.out.print(row[i] +" ");
         }
     }

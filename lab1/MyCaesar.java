@@ -72,10 +72,25 @@ public class MyCaesar {
         return result;
     }
 
+    //advanced task3
+//    public String encryCharA (String c, int n){
+//        String result = "";
+//        for ( int i =0; i < c.length(); i ++){
+//            char ch = c. charAt(i);
+//            if ( ch == ' '){
+//                result += " ";
+//            }else{
+//                if ( (int)( (ch + n)% 26) >=90){
+//                    result +=
+//                }
+//            }
+//        }
+//    }
+
     public static void main(String[] args) throws Exception {
         MyCaesar test = new MyCaesar(3);
 //        System.out.println(test.encryptChar(ALPHABET[0]));
-        System.out.println(test.encrypt("HELLO HAHAA"));
-        System.out.println(test.decrypt("XUBBE XQXQQ"));
+//        System.out.println(test.encrypt("HELLO HAHAA"));
+//        System.out.println(test.decrypt("XUBBE XQXQQ"));
     }
 }
