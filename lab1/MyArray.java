@@ -98,8 +98,8 @@ public class MyArray {
     public int[] fillMissingValue(int k) {
         int[] listIndex = new int[array.length];
         int cursor =0; // bien dem
-        for ( int i=0; i < array.length ; i++){
-            if (array[i] == -1){
+        for ( int i = 1; i < array.length ; i++){
+            if (array[ i - 1] > array[i] || array[i] == -1){
                 listIndex[cursor ++] = i;// luu vi tri
                     //cho k = 3
                     int sum =0;
@@ -110,7 +110,7 @@ public class MyArray {
                         sum += array[i +j];
                     }
                     if ( k % 2 ==1){
-                        if ( array[i -k/2 -1] < array[i + k/2 +1] && array[i + k /2 +1] != -1){
+                        if ( array[i -k/2 -1] > array[i + k/2 +1] && array[i + k /2 +1] != -1){
                             sum += array[i +k/2 +1];
 
                         }else if ( indexOf(listIndex, i -k/2 -1 ) != -1 && i -k/2 -1 != 0){
@@ -145,6 +145,6 @@ public class MyArray {
 //        System.out.print(Arrays.toString(test.removeDuplicates()));
 //        System.out.print(test.getMissingValues().toString());
 //        System.out.print(Arrays.toString(test.getMissingValues1()));
-        System.out.println(Arrays.toString(test.fillMissingValue(4)));
+        System.out.println(Arrays.toString(test.fillMissingValue(3)));
     }
 }
