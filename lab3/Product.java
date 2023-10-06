@@ -1,6 +1,6 @@
 package lab3;
 
-public class Product {
+public class Product{
     private String id;
     private String name;
     private double price;
@@ -31,6 +31,14 @@ public class Product {
 
     @Override
     public String toString() {
-        return  id + "," + name + "," + price + "," + type ;
+        return id + "," + name + "," + price + "," + type;
+    }
+
+    public int compareTo(Product p) {
+        int byName = this.getName().compareTo(p.getName());
+        if ( byName == 0){
+            int byPrice = Double.compare(this.getPrice(), p.getPrice());
+        }
+        return byName;
     }
 }

@@ -1,6 +1,6 @@
 package lab3;
 
-public class OrderItem extends Comparetor {
+public class OrderItem {
     private Product p;
     private  int quality;
 
@@ -15,7 +15,7 @@ public class OrderItem extends Comparetor {
 
     @Override
     public String toString() {
-        return  p + ", " + quality;
+        return  p + "," + quality + "\n";
     }
 
 }
