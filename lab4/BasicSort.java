@@ -58,6 +58,35 @@ public class BasicSort {
         }
     }
 
+    public static int[] mergeSort(int[] arr, int left, int right) {
+        if (left == right) return arr;
+        int mid = (left + right) / 2;
+        int[] arr1 = mergeSort(arr, left, mid);
+        int[] arr2 = mergeSort(arr, mid + 1, right);
+
+//        int[] result = merge(arr, arr1, arr2);
+        //tron vao: arr1 va arr2 la 2 mang da duoc sap xep
+        int length = arr1.length + arr2.length;
+        int[] result = new int[length];
+        int i = 0;
+        int i1 = 0;
+        int i2 = 0;
+        while (i1 < arr1.length && i2 < arr2.length) {
+            if (arr1[i1] <= arr2[i2]) {
+                result[i++] = arr2[i2++];
+            } else {
+                result[i++] = arr1[i1++];
+            }
+        }
+        while (i1 < arr1.length) {
+            result[i++] = arr1[i1++];
+        }
+        while (i2 < arr2.length) {
+            result[i++] = arr2[i2++];
+        }
+        return result;
+    }
+
     private static void merge(int[] arr, int[] left, int[] right) {
         int i = 0, j = 0, k = 0;
         while (i < left.length && j < right.length) {
@@ -73,13 +102,15 @@ public class BasicSort {
         while (j < right.length) {
             arr[k++] = right[j++];
         }
+//        System.out.println(left.length);
+//        System.out.println(right.length);
     }
 
 
     public static void quickSort(int[] array) {
         int left = 0;
-        int right = array.length -1;
-        getPivot_MedianOfThree(array, left , right);
+        int right = array.length - 1;
+        getPivot_MedianOfThree(array, left, right);
     }
 
     private static void getPivot_MedianOfThree(int[] array, int left, int right) {
@@ -95,7 +126,7 @@ public class BasicSort {
             while (array[j] < key) {
                 j--;
             }
-            if (i < j) {
+            if (i <= j) {// dieu kien dung
                 swap(array, i, j);
                 i++;
                 j--;
@@ -109,22 +140,8 @@ public class BasicSort {
         }
     }
 
-
-//    public static int supportMerge(int[] array, int l, int r) {
-//        int mid = 0;
-//        if (l < r) {
-//            mid = (l + r) / 2;
-//            int leftArray = supportMerge(array, l, mid);
-//            int rightArray = supportMerge(array, mid + 1, r);
-//
-////            int resultArray = merge(leftArray, rightArray, );
-//        }
-//        return 1;
-//    }
-
-
     public static void main(String[] args) {
-        int[] test = {4, 2, 8, 5, 73, 6, 10};
+        int[] test = {4, 2, 83, 5, 7, 6, 10};
 //        selectionSort(test);
 //        bubbleSort(test);
 //        insertionSort(test);
