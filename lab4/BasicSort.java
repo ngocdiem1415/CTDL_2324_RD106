@@ -23,14 +23,14 @@ public class BasicSort {
     }
 
     public static void bubbleSort(int[] array) {
-        for (int i = 0; i < array.length - 1; i++) {
-            boolean stop = true;
-            for (int j = i; j < array.length - 1 - i; j++) { // tru i vi moi lan swap nhung so o sau da duoc kt,thuat toan it phuc tap hon
-                if (array[j] < array[j + 1]) {
-                    swap(array, i, j);
-                    stop = false;
+        for (int i = 0; i < array.length - 1; i++) {// dung de dem so phantu da vao dung vi tri
+//            boolean stop = true;
+            for (int j = 0; j < array.length - 1 - i; j++) { // tru i vi moi lan swap nhuong so o sau da duoc kt,thuat toan it phuc tap hon
+                if (array[j + 1] > array[j]) {
+                    swap(array, j, j + 1);
+//                    stop = false;
                 }
-                if (stop) break;
+//                if (stop) break;
             }
         }
     }
@@ -41,53 +41,14 @@ public class BasicSort {
             int cur = array[k];
             int j = k;
             while (j > 0 && array[j - 1] < cur) {
-                swap(array, j, j - 1);
+                array[j] = array[j - 1];
                 j--;
             }
+            array[j] = cur;
         }
     }
 
-    public static void mergeSort(int[] arr) {
-        if (arr.length > 1) {
-            int mid = arr.length / 2;
-            int[] left = Arrays.copyOfRange(arr, 0, mid);
-            int[] right = Arrays.copyOfRange(arr, mid, arr.length);
-            mergeSort(left);
-            mergeSort(right);
-            merge(arr, left, right);
-        }
-    }
-
-    public static int[] mergeSort(int[] arr, int left, int right) {
-        if (left == right) return arr;
-        int mid = (left + right) / 2;
-        int[] arr1 = mergeSort(arr, left, mid);
-        int[] arr2 = mergeSort(arr, mid + 1, right);
-
-//        int[] result = merge(arr, arr1, arr2);
-        //tron vao: arr1 va arr2 la 2 mang da duoc sap xep
-        int length = arr1.length + arr2.length;
-        int[] result = new int[length];
-        int i = 0;
-        int i1 = 0;
-        int i2 = 0;
-        while (i1 < arr1.length && i2 < arr2.length) {
-            if (arr1[i1] <= arr2[i2]) {
-                result[i++] = arr2[i2++];
-            } else {
-                result[i++] = arr1[i1++];
-            }
-        }
-        while (i1 < arr1.length) {
-            result[i++] = arr1[i1++];
-        }
-        while (i2 < arr2.length) {
-            result[i++] = arr2[i2++];
-        }
-        return result;
-    }
-
-    private static void merge(int[] arr, int[] left, int[] right) {
+    private static void sortArray(int[] arr, int[] left, int[] right) {
         int i = 0, j = 0, k = 0;
         while (i < left.length && j < right.length) {
             if (left[i] > right[j]) {
@@ -106,24 +67,65 @@ public class BasicSort {
 //        System.out.println(right.length);
     }
 
+    public static void mergeSort(int[] arr) {
+        if (arr.length > 1) {
+            int mid = arr.length / 2;
+            int[] left = Arrays.copyOfRange(arr, 0, mid);
+            int[] right = Arrays.copyOfRange(arr, mid, arr.length);
+            mergeSort(left);
+            mergeSort(right);
+            sortArray(arr, left, right);
+        }
+    }
+//    public static int[] mergeSort(int[] arr, int left, int right) {
+//        if (left == right) return arr;
+//        int mid = (left + right) / 2;
+//        int[] arr1 = mergeSort(arr, left, mid);
+//        int[] arr2 = mergeSort(arr, mid + 1, right);
+//
+////        int[] result = merge(arr, arr1, arr2);
+//        //tron vao: arr1 va arr2 la 2 mang da duoc sap xep
+//        int length = arr1.length + arr2.length;
+//        int[] result = new int[length];
+//        int i = 0;
+//        int i1 = 0;
+//        int i2 = 0;
+//        while (i1 < arr1.length && i2 < arr2.length) {
+//            if (arr1[i1] <= arr2[i2]) {
+//                result[i++] = arr2[i2++];
+//            } else {
+//                result[i++] = arr1[i1++];
+//            }
+//        }
+//        while (i1 < arr1.length) {
+//            result[i++] = arr1[i1++];
+//        }
+//        while (i2 < arr2.length) {
+//            result[i++] = arr2[i2++];
+//        }
+//        return result;
+
+//    }
+
 
     public static void quickSort(int[] array) {
         int left = 0;
         int right = array.length - 1;
-        getPivot_MedianOfThree(array, left, right);
+//        getPivot_MedianOfThree(array, left, right);
+        getPivot_First(array, left, right);
     }
 
     private static void getPivot_MedianOfThree(int[] array, int left, int right) {
         int mid = (left + right) / 2;
-        int key = array[mid];
+        int pivot = array[mid];
         int i = left; // i : nho
         int j = right; //j : lon
 
         while (i <= j) {
-            while (array[i] > key) {
+            while (array[i] > pivot) {
                 i++;
             }
-            while (array[j] < key) {
+            while (array[j] < pivot) {
                 j--;
             }
             if (i <= j) {// dieu kien dung
@@ -140,8 +142,23 @@ public class BasicSort {
         }
     }
 
+    private static void getPivot_First(int[] array, int left, int right) {
+        int pivot = array[left];
+        int i = left;
+        int j = right;
+        int temp = 0;
+
+        for (int k = left + 1; k < right; k++) {
+            if (array[k] < pivot) {
+                swap(array, temp, k);
+            }
+        }
+        swap(array, left, j);
+    }
+
     public static void main(String[] args) {
-        int[] test = {4, 2, 83, 5, 7, 6, 10};
+//        int[] test = {4, 2, 83, 5, 7, 6, 10};
+        int[] test = {5, 4, 10, 2, 9, 45, 9};
 //        selectionSort(test);
 //        bubbleSort(test);
 //        insertionSort(test);
