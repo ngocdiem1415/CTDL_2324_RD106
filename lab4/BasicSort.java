@@ -107,55 +107,6 @@ public class BasicSort {
 
 //    }
 
-
-    public static void quickSort(int[] array) {
-        int left = 0;
-        int right = array.length - 1;
-//        getPivot_MedianOfThree(array, left, right);
-        getPivot_First(array, left, right);
-    }
-
-    private static void getPivot_MedianOfThree(int[] array, int left, int right) {
-        int mid = (left + right) / 2;
-        int pivot = array[mid];
-        int i = left; // i : nho
-        int j = right; //j : lon
-
-        while (i <= j) {
-            while (array[i] > pivot) {
-                i++;
-            }
-            while (array[j] < pivot) {
-                j--;
-            }
-            if (i <= j) {// dieu kien dung
-                swap(array, i, j);
-                i++;
-                j--;
-            }
-        }
-        if (left < j) {
-            getPivot_MedianOfThree(array, left, j);
-        }
-        if (right > i) {
-            getPivot_MedianOfThree(array, i, right);
-        }
-    }
-
-    private static void getPivot_First(int[] array, int left, int right) {
-        int pivot = array[left];
-        int i = left;
-        int j = right;
-        int temp = 0;
-
-        for (int k = left + 1; k < right; k++) {
-            if (array[k] < pivot) {
-                swap(array, temp, k);
-            }
-        }
-        swap(array, left, j);
-    }
-
     public static void main(String[] args) {
 //        int[] test = {4, 2, 83, 5, 7, 6, 10};
         int[] test = {5, 4, 10, 2, 9, 45, 9};
@@ -163,7 +114,6 @@ public class BasicSort {
 //        bubbleSort(test);
 //        insertionSort(test);
 //        mergeSort(test);
-        quickSort(test);
         System.out.println(Arrays.toString(test));
     }
 }
