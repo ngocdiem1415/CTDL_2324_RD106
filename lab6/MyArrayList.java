@@ -52,35 +52,97 @@ public class MyArrayList<E> {
         return true;
     }
 
+    public boolean contain(E o) {
+        for (int i = 0; i < element.length; i++)
+            if (element[i] == o) {
+                return true;
+            }
+        return false;
+    }
+
     public void add(int i, E e) throws IndexOutOfBoundsException {
         if (i < 0 || i >= size) {
             throw new IndexOutOfBoundsException("out of bound");
         } else {
             growSize();
-//            E[] result = new E[];
-//            System.arraycopy(result, i , e, i +1, size() -i);
-//            result[i] = e;
             E temp = element[i];
-            element[i] = e;
-            int i1 = i;
-            for (int j = i + 2; j < size() + 1; j++) {
-                element[j] = element[++i1];
+            for (int j = size() + 1; j > i; j--) {
+                element[j] = element[j - 1];
             }
-            element[i + 1] = temp;
+            element[i] = e;
             size++;
         }
     }
 
     public E remove(int i) throws IndexOutOfBoundsException {
+        E temp = element[i];
         if (i < 0 || i >= size()) {
             throw new IndexOutOfBoundsException();
         } else {
-            for (int j = 0; j < size(); j++) {
-
+            if (contain(temp)) {
+                for (int j = i; j < size() - 1; j++) {
+                    element[j] = element[j + 1];
+                }
+                size--;
             }
         }
-        return element[i];
+        return temp;
     }
+
+    public void clear() {
+        element = (E[]) new Object[DEFAULT_CAPACITY];
+    }
+
+    public E[] toArray() {
+        return Arrays.copyOf(element, size());
+    }
+
+    public MyArrayList<E> clone() {
+        MyArrayList<E> result = new MyArrayList<>();
+        result.element = element.clone();
+        return result;
+    }
+
+    public int lastIndexOf(Object o) {
+        int index = -1;
+        if (this.isEmpty()) {
+            return -1;
+        } else {
+            for (int i = 0; i < element.length; i++) {
+                if (element[i] == o) {
+                    index = i;
+                }
+            }
+        }
+        return index;
+    }
+
+    public int indexOf(E o) {
+        int index = -1;
+        if (this.isEmpty()) {
+            return -1;
+        } else {
+            for (int i = 0; i < element.length; i++) {
+                if (element[i] == o) {
+                    index =i;
+                    break;
+                }
+            }
+        }
+        return index;
+    }
+
+    public boolean remove(E e) {
+        if ( !contain(e)){
+            return false;
+        }else {
+            int index = indexOf(e);
+            remove(index);
+            size--;
+            return true;
+        }
+    }
+
 
     @Override
     public String toString() {
@@ -97,8 +159,9 @@ public class MyArrayList<E> {
         test.add(6);
         test.add(2);
         test.add(1, 7);
+        test.add(2, 9);
         test.add(2, 7);
-        test.add(4, 7);
-        System.out.println(test.toString());
+//        System.out.println(test.indexOf(7));
+        System.out.println(test.remove(7));
     }
 }
