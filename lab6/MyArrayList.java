@@ -135,8 +135,9 @@ public class MyArrayList<E> {
     public boolean remove(E e) {
         if ( !contain(e)){
             return false;
-        }else {
+        }else{
             int index = indexOf(e);
+            System.out.println(index);
             remove(index);
             size--;
             return true;
@@ -161,7 +162,18 @@ public class MyArrayList<E> {
         test.add(1, 7);
         test.add(2, 9);
         test.add(2, 7);
+//        System.out.println(test.size());
+//        System.out.println(test.isEmpty());
+        System.out.println(test);
+//        System.out.println(test.get(1));
+//        System.out.println(test.set(1,9));
+//        test.clear();
+//        System.out.println(test.remove(1));
+//        System.out.println(test.lastIndexOf(7));
+//        System.out.println(test.contain(7));
+//        System.out.println(test.clone().toString());
 //        System.out.println(test.indexOf(7));
-        System.out.println(test.remove(7));
+        System.out.println(test.remove(Integer.valueOf(7)));
+        System.out.println(test);
     }
 }
