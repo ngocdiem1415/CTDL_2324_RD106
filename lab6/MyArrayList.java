@@ -1,6 +1,7 @@
 package lab6;
 
 import java.util.Arrays;
+import java.util.Comparator;
 
 public class MyArrayList<E> {
     public static final int DEFAULT_CAPACITY = 10;
@@ -124,7 +125,7 @@ public class MyArrayList<E> {
         } else {
             for (int i = 0; i < element.length; i++) {
                 if (element[i] == o) {
-                    index =i;
+                    index = i;
                     break;
                 }
             }
@@ -133,9 +134,9 @@ public class MyArrayList<E> {
     }
 
     public boolean remove(E e) {
-        if ( !contain(e)){
+        if (!contain(e)) {
             return false;
-        }else{
+        } else {
             int index = indexOf(e);
             System.out.println(index);
             remove(index);
@@ -144,6 +145,9 @@ public class MyArrayList<E> {
         }
     }
 
+    public void sort(Comparator<E> c) {
+        Arrays.sort(element, 0, size(), c);
+    }
 
     @Override
     public String toString() {
@@ -162,9 +166,22 @@ public class MyArrayList<E> {
         test.add(1, 7);
         test.add(2, 9);
         test.add(2, 7);
+        test.sort(null);
+//        test.sort(new Comparator<Integer>() {
+//            @Override
+//            public int compare(Integer o1, Integer o2) {
+//                if (o1 < o2) {
+//                    return 1;
+//                } else if (o1 == o2) {
+//                    return 0;
+//                } else {
+//                    return -1;
+//
+//            }
+//        }
+//    });
 //        System.out.println(test.size());
 //        System.out.println(test.isEmpty());
-        System.out.println(test);
 //        System.out.println(test.get(1));
 //        System.out.println(test.set(1,9));
 //        test.clear();
@@ -173,7 +190,7 @@ public class MyArrayList<E> {
 //        System.out.println(test.contain(7));
 //        System.out.println(test.clone().toString());
 //        System.out.println(test.indexOf(7));
-        System.out.println(test.remove(Integer.valueOf(7)));
+//        System.out.println(test.remove(Integer.valueOf(7)));
         System.out.println(test);
-    }
+}
 }
