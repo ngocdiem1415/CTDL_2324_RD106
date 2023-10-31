@@ -1,4 +1,4 @@
-package lab7.set_student;
+package lab7;
 
 import java.io.File;
 import java.io.FileNotFoundException;
