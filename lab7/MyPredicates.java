@@ -4,6 +4,7 @@ import java.util.*;
 
 public class MyPredicates{
 
+    // remove gia tri khi p.test : true
     public static <T> void remove(Collection<T> coll, Predicate<T> p){
         Iterator<T> iter = coll.iterator();
         while ( iter.hasNext()){
@@ -14,6 +15,7 @@ public class MyPredicates{
         }
     }
 
+    // remove gia tri khi p.test : false
     public static <T> void retain (Collection<T> coll, Predicate<T> p){
         Iterator<T> iter = coll.iterator();
         while ( iter.hasNext()){
@@ -37,6 +39,15 @@ public class MyPredicates{
     }
 
     public static <T> int find ( Collection<T> coll, Predicate<T> p){
+        Iterator<T> iter = coll.iterator();
+        int count = -1;
+        while ( iter.hasNext()){
+            count++;
+            T next = iter.next();
+            if (p.test(next)) {
+                return count;
+            }
+        }
         return -1;
     }
 
@@ -44,11 +55,11 @@ public class MyPredicates{
         List<Integer> list = new ArrayList<>();
         list.add(1);
         list.add(2);
-        list.add(4);
         list.add(3);
+        list.add(8);
 
         Even p = new Even();
-        MyPredicates.retain(list, p);
-        System.out.println(list);
+        System.out.println(MyPredicates.find(list, p));
+//        System.out.println(list);
     }
 }
