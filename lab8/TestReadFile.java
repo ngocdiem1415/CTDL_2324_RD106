@@ -1,4 +1,4 @@
-package lab8_map;
+package lab8;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -10,7 +10,7 @@ import java.util.function.Predicate;
 public class TestReadFile {
 	public static void main(String[] args) throws FileNotFoundException {
 		// Scanner input = new Scanner(new File("data/hamlet.txt"));
-		Scanner input = new Scanner(new File("data/fit.txt"));
+		Scanner input = new Scanner(new File("lab8/data/fit.txt"));
 
 		while (input.hasNext()) {
 			String word = input.next();

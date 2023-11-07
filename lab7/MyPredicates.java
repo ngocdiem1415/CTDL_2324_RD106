@@ -2,46 +2,46 @@ package lab7;
 
 import java.util.*;
 
-public class MyPredicates{
+public class MyPredicates {
 
     // remove gia tri khi p.test : true
-    public static <T> void remove(Collection<T> coll, Predicate<T> p){
+    public static <T> void remove(Collection<T> coll, Predicate<T> p) {
         Iterator<T> iter = coll.iterator();
-        while ( iter.hasNext()){
+        while (iter.hasNext()) {
             T next = iter.next();
-            if ( p.test(next)){
+            if (p.test(next)) {
                 iter.remove();
             }
         }
     }
 
     // remove gia tri khi p.test : false
-    public static <T> void retain (Collection<T> coll, Predicate<T> p){
+    public static <T> void retain(Collection<T> coll, Predicate<T> p) {
         Iterator<T> iter = coll.iterator();
-        while ( iter.hasNext()){
+        while (iter.hasNext()) {
             T next = iter.next();
-            if ( ! p.test(next)){
+            if (!p.test(next)) {
                 iter.remove();
             }
         }
     }
 
-    public static <T> Set<T> collect (Collection<T> coll, Predicate<T> p){
+    public static <T> Set<T> collect(Collection<T> coll, Predicate<T> p) {
         Set<T> result = new HashSet<>();
         Iterator<T> iter = coll.iterator();
-        while ( iter.hasNext()){
+        while (iter.hasNext()) {
             T next = iter.next();
-            if ( p.test(next)){
+            if (p.test(next)) {
                 result.add(next);
             }
         }
         return result;
     }
 
-    public static <T> int find ( Collection<T> coll, Predicate<T> p){
+    public static <T> int find(Collection<T> coll, Predicate<T> p) {
         Iterator<T> iter = coll.iterator();
         int count = -1;
-        while ( iter.hasNext()){
+        while (iter.hasNext()) {
             count++;
             T next = iter.next();
             if (p.test(next)) {
