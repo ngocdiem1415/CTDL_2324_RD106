@@ -7,7 +7,7 @@ import java.io.FileNotFoundException;
 import java.util.*;
 
 public class MyWordCountApp {
-    // public static final String fileName = "data/hamlet.txt";
+//     public static final String fileName = "lab8/data/hamlet.txt";
     public static final String fileName = "lab8/data/fit.txt";
     private Map<String, Integer> map = new HashMap<String, Integer>();
 
@@ -35,22 +35,29 @@ public class MyWordCountApp {
     // data/hamlet.txt (or fit.txt)
     // In this method, we do not consider the order of tokens.
     public void printWordCounts() throws FileNotFoundException {
-        TreeMap<String, Integer> treeMap = new TreeMap<>();
-        treeMap.putAll(this.map);
+//        TreeMap<String, Integer> treeMap = new TreeMap<>();
+//        treeMap.putAll(this.map);
+        System.out.println(this.map);
     }
 
     // Prints out the number of times each unique token appears in the file
     // data/hamlet.txt (or fit.txt) according to ascending order of tokens
     // Example: An - 3, Bug - 10, ...
     public void printWordCountsAlphabet() {
+        TreeMap<String, Integer> treeMap = new TreeMap<>(new Comparator<String>() {
+            @Override
+            public int compare(String o1, String o2) {
+                return o1.compareToIgnoreCase(o2);
+            }
+        });
+        treeMap.putAll(this.map);
+        System.out.println(treeMap);
     }
 
-    public String toString() {
-        return "" + map + "";
-    }
-
-    public static void main(String[] args) {
-        MyWordCount test = new MyWordCount();
-        System.out.println(test);
+    public static void main(String[] args) throws FileNotFoundException {
+        MyWordCountApp test = new MyWordCountApp();
+//        test.printWordCounts();
+        test.printWordCountsAlphabet();
+//        System.out.println(test);
     }
 }

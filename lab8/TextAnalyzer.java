@@ -24,7 +24,7 @@ public class TextAnalyzer {
         while (true) {
             line = r.readLine();//null
             if (line == null) break;
-            StringTokenizer tokens = new StringTokenizer(line, "");
+            StringTokenizer tokens = new StringTokenizer(line, " ");
             while (tokens.hasMoreTokens()) {
                 String word = tokens.nextToken();
                 if (!tokens.hasMoreTokens()) {
@@ -44,25 +44,33 @@ public class TextAnalyzer {
     // the text file
 
     public void add(String word, int position) {
-        if ( !map.containsKey(word)){
+        if ( map.containsKey(word)){
+            ArrayList<Integer> value = map.get(word);
+            value.add(position);
+        }else{
             ArrayList<Integer> value = new ArrayList<>();
             value.add(position);
-            map.put(word, );
-        }else{
-
+            map.put(word, value);
         }
-        // TODO
     }
 
     // This method should display the words of the text file along with the
     // positions of each word, one word per line, in alphabetical order
     public void displayWords() {
-        // TODO
+        TreeMap<String, ArrayList<Integer>> re = new TreeMap<>(new Comparator<String>() {
+            @Override
+            public int compare(String o1, String o2) {
+                return o1.compareToIgnoreCase(o2) ;
+            }
+        });
+        re.putAll(this.map);
+        System.out.println(re);
     }
 
-    // This method will display the content of the text file stored in the map
+    // This method will display the content of the text
+    // file stored in the map
     public void displayText() {
-        // TODO
+
     }
 
     // This method will return the word that occurs most frequently in the text file
@@ -71,12 +79,9 @@ public class TextAnalyzer {
         return null;
     }
 
-    public String toString() {
-        return "" +map +"";
-    }
-
     public static void main(String[] args) throws  IOException{
         TextAnalyzer test = new TextAnalyzer();
-        System.out.println(test);
+        test.displayWords();
+//        System.out.println(test);
     }
 }
