@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.util.*;
 
 public class TextAnalyzer {
-    public static final String fileName = "lab8/data/fit.txt";
+    public static final String fileName = "lab8/data/hamlet.txt";
     // <word, its positions>
     private Map<String, ArrayList<Integer>> map = new HashMap<String, ArrayList<Integer>>();
 
@@ -44,10 +44,10 @@ public class TextAnalyzer {
     // the text file
 
     public void add(String word, int position) {
-        if ( map.containsKey(word)){
+        if (map.containsKey(word)) {
             ArrayList<Integer> value = map.get(word);
             value.add(position);
-        }else{
+        } else {
             ArrayList<Integer> value = new ArrayList<>();
             value.add(position);
             map.put(word, value);
@@ -60,7 +60,7 @@ public class TextAnalyzer {
         TreeMap<String, ArrayList<Integer>> re = new TreeMap<>(new Comparator<String>() {
             @Override
             public int compare(String o1, String o2) {
-                return o1.compareToIgnoreCase(o2) ;
+                return o1.compareToIgnoreCase(o2);
             }
         });
         re.putAll(this.map);
@@ -69,9 +69,60 @@ public class TextAnalyzer {
 
     // This method will display the content of the text
     // file stored in the map
-    public void displayText() {
+//    public void displayText() {
+//        Set<String> keySet = map.keySet();
+//        ArrayList<Integer>  listValues = new ArrayList<>();
+//        ArrayList<String> listKey = new ArrayList<>();
+//        listKey.addAll(keySet);
+////        for ( String key: keySet ) {
+////            listValues.addAll(map.get(key));
+////        }
+//        int index = 1;
+//        if ( !listKey.contains(index)){
+//            System.out.println();
+//        }
 
+    public void displayText() {
+        Set<String> setKey = map.keySet();
+        List<Integer> listPos = new ArrayList<>();
+        List<String> listString = new ArrayList<>();
+        for (String key : setKey) {
+            listPos.addAll(map.get(key));
+            for (Integer temp : map.get(key)) {
+                listString.add(key);
+            }
+        }
+        int index = 0;
+        while ( index < listString.size()){
+            index++;
+            if (!listPos.contains(index)) {
+                System.out.print(listString.get(listPos.indexOf(-index)) + " ");
+                System.out.println();
+            } else System.out.print(listString.get(listPos.indexOf(index)) + " ");
+        }
     }
+
+//    public int countAllWords() {
+//        int count = 0;
+//        for (String word : map.keySet()) {
+//            count += map.get(word).size();
+//        }
+//        System.out.println(count);
+//        return count;
+//    }
+//    public void displayText1() {
+//        int count = countAllWords();
+//        String content[] = new String[count];
+//        for (String word : map.keySet()) {
+//            for (int i = 0; i < map.get(word).size(); i++) {
+//                content[map.get(word).get(i)] = word;
+//            }
+//        }
+//        for (int i = 0; i < content.length; i++) {
+//            System.out.print(" " + content[i]);
+//        }
+//
+//    }
 
     // This method will return the word that occurs most frequently in the text file
     public String mostFrequentWord() {
@@ -79,9 +130,17 @@ public class TextAnalyzer {
         return null;
     }
 
-    public static void main(String[] args) throws  IOException{
+    @Override
+    public String toString() {
+        return "TextAnalyzer{" +
+                "map=" + map +
+                '}';
+    }
+
+    public static void main(String[] args) throws IOException {
         TextAnalyzer test = new TextAnalyzer();
-        test.displayWords();
-//        System.out.println(test);
+//        test.displayWords();
+        test.displayText();
+//        System.out.println(test.toString());
     }
 }
