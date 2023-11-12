@@ -60,7 +60,7 @@ public class MyWordCount implements Comparator<WordCount> {
                 result.add(w.getWords());
             }
         }
-        return null;
+        return result;
     }
 
     //in ra list cac tu duoc sap xếp theo thứ tự tăng dần
