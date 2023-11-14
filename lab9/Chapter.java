@@ -1,4 +1,4 @@
-package lab9.task2;
+package lab9;
 
 public class Chapter {
     private String title;

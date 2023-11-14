@@ -1,4 +1,4 @@
-package lab9;
+package lab9.task1;
 
 import java.util.*;
 
@@ -14,11 +14,12 @@ public class Faculty {
     }
 
     public Course getMaxPracticalCourse() {
-        Course temp = courses.get(0);
+        Course temp = null;
         if (courses.size() < 0) {
             return null;
         } else {
             for (int i = 1; i < courses.size(); i++) {
+                //xet dk la th hay lt
                 if (temp.isSize() < courses.get(i).isSize()) {
                     temp = courses.get(i);
                 }
@@ -30,7 +31,16 @@ public class Faculty {
     public Map<Integer, List<Student>> groupStudentByYear(){
         int year = 2000;
         Map<Integer, List<Student>> map = new HashMap<>();
+        List<Student> listStudent = new ArrayList<>();
+        for ( Course temp: courses ){
 
+            if ( temp.groupStudent(year) == null){
+                year++;
+            }else{
+                listStudent.addAll(temp.groupStudent(year));
+                map.put(year, listStudent);
+            }
+        }
         return map;
     }
 

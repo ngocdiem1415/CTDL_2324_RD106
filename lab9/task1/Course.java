@@ -1,9 +1,7 @@
-package lab9;
+package lab9.task1;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 public class Course {
     private String id;

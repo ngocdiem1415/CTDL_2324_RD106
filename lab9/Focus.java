@@ -1,6 +1,6 @@
-package lab9.task2;
+package lab9;
 
-public class Focus extends Book {
+public class Focus extends Publication {
     private String name;
 
     public Focus(String title, int page, int publishYear, String author, String cost, String name) {
