@@ -27,6 +27,10 @@ public class Course {
         return students;
     }
 
+    public String getType() {
+        return type;
+    }
+
     public void addStudent (Student st){
         students.add(st);
     }
@@ -35,21 +39,5 @@ public class Course {
         return students.size();
     }
 
-    public List<Student> groupStudent(int year){
-        List<Student> list = new ArrayList<>();
-        for (Student st: students) {
-            if (st.getYear() == year){
-                list.add(st);
-            }
-        }
-        return list;
-    }
 
-//    public Set<Integer> listYear() {
-//        Set<Integer> listYear = new HashSet<>();
-//        for (Student i: students  ) {
-//            listYear.add(i.getYear());
-//        }
-//        return listYear;
-//    }
 }

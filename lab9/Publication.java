@@ -15,6 +15,11 @@ public abstract class Publication {
         this.cost = cost;
     }
 
+    @Override
+    public String toString() {
+        return title + " ," +page +" ,"+ publishYear +" ,"+ author + " ," + cost +" ,"  ;
+    }
+
     public int getPublishYear() {
         return publishYear;
     }
@@ -23,16 +28,21 @@ public abstract class Publication {
         return cost;
     }
 
-    public String isType(Publication book) {
-        return book instanceof Focus ? "fucus" :"referenBook";
+    public String getAuthor() {
+        return author;
     }
 
-    public boolean isFocusAnd10PublishYear (Publication book) {
-        return (isType(book).equals("fucus") && book.publishYear == 2021);
+    public String getTitle() {
+        return title;
     }
 
-    public boolean sameTypeAndAuthor ( Publication book1, Publication book2){
-        return ( isType(book1).equals(isType(book2)) && (book1.author.equals(book2.author)));
-    }
+    public abstract String isType();
 
+    public abstract boolean isFocusAnd10PublishYear ();
+
+    public abstract int isSizeChaper();
+
+    public boolean sameAuthorAndSameType (Publication orther){
+        return this.author.equalsIgnoreCase(orther.author) && this.isType().equalsIgnoreCase(orther.isType());
+    }
 }

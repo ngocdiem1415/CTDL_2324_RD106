@@ -12,11 +12,30 @@ public class ReferenceBook extends Publication {
         this.chapters = chapters;
     }
 
+    @Override
+    public String toString() {
+        return super.toString() + fied + " " + " " + chapters + "\n";
+    }
+
+    @Override
+    public String isType() {
+        return "ReferenceBook";
+    }
+
+    @Override
+    public boolean isFocusAnd10PublishYear() {
+        return false;
+    }
+
     public List<Chapter> getChapters() {
         return chapters;
     }
 
-    public int isSize(){
-        return chapters.size();
+    public int isSizeChaper() {
+        int total = 0;
+        for (Chapter i : chapters) {
+            total += i.getPage();
+        }
+        return total;
     }
 }

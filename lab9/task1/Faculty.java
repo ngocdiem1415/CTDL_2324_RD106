@@ -18,10 +18,13 @@ public class Faculty {
         if (courses.size() < 0) {
             return null;
         } else {
-            for (int i = 1; i < courses.size(); i++) {
-                //xet dk la th hay lt
-                if (temp.isSize() < courses.get(i).isSize()) {
-                    temp = courses.get(i);
+            for ( int i =0; i < courses.size(); i+=2) {
+                if ( courses.get(i).getType().equals("TH")){
+                    if (courses.get(i).isSize() < courses.get(i+1).isSize()) {
+                        temp = courses.get(i +1);
+                    }else{
+                        temp = courses.get(i);
+                    }
                 }
             }
         }
@@ -29,23 +32,35 @@ public class Faculty {
     }
 
     public Map<Integer, List<Student>> groupStudentByYear(){
-        int year = 2000;
         Map<Integer, List<Student>> map = new HashMap<>();
-        List<Student> listStudent = new ArrayList<>();
-        for ( Course temp: courses ){
-
-            if ( temp.groupStudent(year) == null){
-                year++;
-            }else{
-                listStudent.addAll(temp.groupStudent(year));
-                map.put(year, listStudent);
+        for ( Course temp: courses ) {
+            List<Student> liststudent = temp.getStudents();
+            for (Student st : liststudent) {
+                int key = st.getYear();
+                if (!map.containsKey(key)){
+                    List<Student> list = new ArrayList<>();
+                    list.add(st);
+                    map.put(key, list);
+                }else{
+                    map.get(key).add(st);
+                }
             }
         }
         return map;
     }
 
     public Set<Course> filterCourses(String type){
-        Set<Course> result = new HashSet<>();
+        Set<Course> result = new TreeSet<>(new Comparator<Course>() {
+            @Override
+            public int compare(Course o1, Course o2) {
+                return o2.isSize() - o1.isSize();
+            }
+        });
+        for (Course temp :courses) {
+            if (temp.getType().equalsIgnoreCase(type)){
+                result.add(temp);
+            }
+        }
         return result;
     }
 
@@ -76,10 +91,12 @@ public class Faculty {
         Student st7 = new Student("11", "Nguyen VAn H", 2014);
         Student st8 = new Student("12", "Nguyen VAn J", 2017);
         Student st9 = new Student("13", "Nguyen VAn L", 2023);
+        Student st10 = new Student("20", "Nguyen VAn W", 2023);
         List<Student> l3 = new ArrayList<>();
         l3.add(st7);
         l3.add(st8);
         l3.add(st9);
+        l3.add(st10);
         Course c3 = new Course("3", "LT3", "LT", l3, "C");
 
         List<Course> course = new ArrayList<>();
@@ -88,7 +105,9 @@ public class Faculty {
         course.add(c3);
         Faculty test = new Faculty("A", "123/2A", course);
 
-        System.out.println(test);
+//        System.out.println(test.groupStudentByYear());
+//        System.out.println(test.getMaxPracticalCourse());
+        System.out.println(test.filterCourses("lt"));
 
     }
 }

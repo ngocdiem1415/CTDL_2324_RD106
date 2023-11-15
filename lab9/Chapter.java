@@ -8,4 +8,13 @@ public class Chapter {
         this.title = title;
         this.page = page;
     }
+
+    public int getPage() {
+        return page;
+    }
+
+    @Override
+    public String toString() {
+        return  title + " " +" " + page;
+    }
 }
